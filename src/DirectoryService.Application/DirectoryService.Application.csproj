@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <RootNamespace>DevTasks.Application</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Folder Include="Use-cases\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\DirectoryService.Domain\DirectoryService.Domain.csproj" />
+    </ItemGroup>
+
+</Project>
