@@ -1,0 +1,12 @@
+﻿namespace DevTasks.Domain.Location.VO;
+
+public record LocationId
+{
+    private LocationId(Guid valueId)
+    {
+        Value = valueId;
+    }
+    public Guid Value { get; }
+    
+    public static LocationId Create() => new(Guid.NewGuid());
+}
