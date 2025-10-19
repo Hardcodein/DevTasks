@@ -1,6 +1,1 @@
-﻿namespace DirectoryService.Presentation;
-
-public class GlobalUsing_
-{
-    
-}
+﻿global using DevTasks.Infrastructure;

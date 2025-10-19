@@ -1,6 +1,12 @@
-﻿namespace DevTasks.Infrastructure;
-
-public class GlobalUsing
-{
-    
-}
+﻿global using DevTasks.Domain;
+global using DevTasks.Domain.Location;
+global using DevTasks.Domain.Position;
+global using DevTasks.Domain.Department;
+global using DevTasks.Domain.Location.VO;
+global using DevTasks.Domain.Position.VO;
+global using DevTasks.Domain.Department.VO;
+global using DevTasks.Domain.Department.Relations;
+global using DevTasks.Domain.Department.Relations.VO.DepartmentLocation;
+global using Microsoft.Extensions.Logging;
+global using Microsoft.EntityFrameworkCore;
+global using Microsoft.EntityFrameworkCore.Metadata.Builders;
