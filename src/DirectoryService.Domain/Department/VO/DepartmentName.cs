@@ -18,4 +18,11 @@ public record DepartmentName
         
         return Result.Success(departmentName);
     }
+    
+    #region For Ef core
+    private DepartmentName()
+    {
+        
+    }
+    #endregion
 }

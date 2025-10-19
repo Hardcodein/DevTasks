@@ -39,4 +39,10 @@ public record LocationAddress
         
         return Result.Success(locationAddress);
     }
+    #region For Ef core
+    private LocationAddress()
+    {
+        
+    }
+    #endregion
 }

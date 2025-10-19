@@ -18,4 +18,11 @@ public record LocationName
         
         return Result.Success(locationName);
     }
+    
+    #region For Ef core
+    private LocationName()
+    {
+        
+    }
+    #endregion
 }

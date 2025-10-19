@@ -2,11 +2,19 @@
 
 public record DepartmentPositionId
 {
-    private DepartmentPositionId(Guid valueId)
+    private DepartmentPositionId(Guid value)
     {
-        ValueId = valueId;
+        Value = value;
     }
-    public Guid ValueId { get;}
+    public Guid Value { get;}
 
     public static DepartmentPositionId Create() => new(Guid.NewGuid());
+    public static DepartmentPositionId Create(Guid id) => new(id);
+
+    #region For Ef core
+    private DepartmentPositionId()
+    {
+        
+    }
+    #endregion
 }

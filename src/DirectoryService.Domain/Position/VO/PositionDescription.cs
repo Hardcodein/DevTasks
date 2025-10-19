@@ -18,4 +18,11 @@ public class PositionDescription
         
         return Result.Success(positionDescription);
     }
+    
+    #region For Ef core
+    private PositionDescription()
+    {
+        
+    }
+    #endregion
 }

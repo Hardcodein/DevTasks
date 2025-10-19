@@ -17,4 +17,11 @@ public record DepartmentIdentifier
         
         return Result.Success(departmentIdentifier);
     }
+    
+    #region For Ef core
+    private DepartmentIdentifier()
+    {
+        
+    }
+    #endregion
 }
