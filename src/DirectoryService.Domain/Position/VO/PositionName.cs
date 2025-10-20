@@ -18,4 +18,11 @@ public record PositionName
         
         return Result.Success(positionName);
     }
+    
+    #region For Ef core
+    private PositionName()
+    {
+        
+    }
+    #endregion
 }

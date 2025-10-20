@@ -20,4 +20,11 @@ public record LocationTimeZone
         
         return Result.Success(locationTimeZone);
     }
+    
+    #region For Ef core
+    private LocationTimeZone()
+    {
+        
+    }
+    #endregion
 }

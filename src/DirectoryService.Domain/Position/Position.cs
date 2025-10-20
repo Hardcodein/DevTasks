@@ -21,7 +21,8 @@ public class Position
     public DateTime CreatedAt { get; private set; }
     public DateTime UpdatedAt { get; private set; }
 
-
+    private List<DepartmentPosition> _departments;
+    public IReadOnlyList<DepartmentPosition> Departments => _departments;
     public static Result<Position> Create(string positionName, string positionDescription)
     {
         var id = PositionId.Create();
@@ -34,4 +35,11 @@ public class Position
         
         return Result.Success(position);
     }
+    
+    #region For Ef core
+    private Position()
+    {
+        
+    }
+    #endregion
 }

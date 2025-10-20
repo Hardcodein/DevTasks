@@ -22,4 +22,11 @@ public record DepartmentPath
 
         return Result.Success(departmentPath);
     }
+    
+    #region For Ef core
+    private DepartmentPath()
+    {
+        
+    }
+    #endregion
 }

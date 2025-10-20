@@ -9,4 +9,13 @@ public record PositionId
     public Guid Value { get; }
     
     public static PositionId Create() => new(Guid.NewGuid());
+    public static PositionId Create(Guid id) => new(id);
+    
+    #region For Ef core
+    private PositionId()
+    {
+        
+    }
+    #endregion
+
 }

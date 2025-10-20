@@ -9,34 +9,34 @@ public class Department
         DepartmentId departmentId,
         DepartmentName departmentName,
         DepartmentIdentifier departmentIdentifier,
-        DepartmentId? parentDepartmentId,
+        Department parentDepartment,
         DepartmentPath departmentPath,
         short depth,
-        List<DepartmentLocation> locations,
-        List<DepartmentPosition> positions)
+        IEnumerable<DepartmentLocation> locations,
+        IEnumerable<DepartmentPosition> positions)
     {
         Id = departmentId;
         Name = departmentName;
         Identifier = departmentIdentifier;
-        ParentId = parentDepartmentId;
+        Parent = parentDepartment;
         Path = departmentPath;
         Depth = depth;
         IsActive = true;
         CreatedAt = DateTime.UtcNow;
-        UpdateAt = DateTime.UtcNow;
-        _locations = locations;
-        _positions = positions;
+        UpdatedAt = DateTime.UtcNow;
+        _locations = locations.ToList();
+        _positions = positions.ToList();
     }
 
     public DepartmentId Id { get; private set; }
     public DepartmentName Name { get; private set; }
     public DepartmentIdentifier Identifier { get; private set; }
-    public DepartmentId? ParentId { get; private set; }
+    public Department? Parent { get; private set; }
     public DepartmentPath Path { get; private set; }
     public short Depth { get; private set; }
     public bool IsActive { get; private set; }
     public DateTime CreatedAt { get; private set; }
-    public DateTime UpdateAt { get; private set; }
+    public DateTime UpdatedAt { get; private set; }
 
     private List<Department> _children = [];
 
@@ -48,14 +48,14 @@ public class Department
 
     public IReadOnlyList<DepartmentLocation> Locations => _locations;
 
-    public IReadOnlyList<DepartmentPosition> Position => _positions;
+    public IReadOnlyList<DepartmentPosition> Positions => _positions;
 
     public static Result<Department> Create(
         DepartmentName departmentName,
         DepartmentIdentifier departmentIdentifier,
         Department? departmentParent,
-        IEnumerable<Guid> departmentLocationIds,
-        IEnumerable<Guid> departmentPositionIds)
+        IEnumerable<DepartmentLocation> departmentLocations,
+        IEnumerable<DepartmentPosition> departmentPositions)
     {
         var modelId = DepartmentId.Create();
         var modelPath = DepartmentPath.ChangePath(departmentName.Value, departmentParent).Value;
@@ -70,23 +70,25 @@ public class Department
         {
             depth = 0;
         }
-
-        var locations = departmentLocationIds.Select(l => DepartmentLocation.
-            Create(modelId.Value, l).Value).ToList();
         
-        var positions = departmentPositionIds.Select(p => DepartmentPosition.
-            Create(modelId.Value, p).Value).ToList();
         
         var department = new Department(
             modelId, 
             departmentName, 
             departmentIdentifier,
-            departmentParent?.Id,
+            departmentParent!,
             modelPath,
             depth,
-            locations,
-            positions);
+            departmentLocations,
+            departmentPositions);
         
         return Result.Success(department);
     }
+    
+    #region For Ef core
+    private Department()
+    {
+        
+    }
+    #endregion
 }
