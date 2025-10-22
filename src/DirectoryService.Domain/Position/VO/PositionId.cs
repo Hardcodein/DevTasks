@@ -1,4 +1,4 @@
-﻿namespace DevTasks.Domain.Position.VO;
+﻿namespace DirectoryService.Domain.Position.VO;
 
 public record PositionId
 {
@@ -6,15 +6,16 @@ public record PositionId
     {
         Value = valueId;
     }
+
     public Guid Value { get; }
-    
+
     public static PositionId Create() => new(Guid.NewGuid());
     public static PositionId Create(Guid id) => new(id);
-    
+
     #region For Ef core
     private PositionId()
     {
-        
+
     }
     #endregion
 

@@ -1,4 +1,4 @@
-﻿namespace DevTasks.Domain.Department.VO;
+﻿namespace DirectoryService.Domain.Department.VO;
 
 public record DepartmentId
 {
@@ -6,11 +6,12 @@ public record DepartmentId
     {
         Value = valueId;
     }
+
     public Guid Value { get; }
-    
+
     public static DepartmentId Create() => new(Guid.NewGuid());
     public static DepartmentId Create(Guid valueId) => new(valueId);
-    
+
     #region For Ef core
     private DepartmentId()
     {

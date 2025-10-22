@@ -1,11 +1,11 @@
-﻿namespace DevTasks.Domain.Location.VO;
+﻿namespace DirectoryService.Domain.Location.VO;
 
 public record LocationAddress
 {
     private LocationAddress(
-        string mailIndex, 
+        string mailIndex,
         string city,
-        string district, 
+        string district,
         string street,
         string numberofHouse)
     {
@@ -15,6 +15,7 @@ public record LocationAddress
         Street = street;
         NumberofHouse = numberofHouse;
     }
+
     public string MailIndex { get; }
     public string City { get; }
     public string District { get; }
@@ -22,21 +23,21 @@ public record LocationAddress
     public string NumberofHouse { get; }
 
     public static Result<LocationAddress> Create(
-        string mailIndex, 
-        string city, 
-        string district, 
+        string mailIndex,
+        string city,
+        string district,
         string street,
         string numberofHouse)
     {
         if(string.IsNullOrWhiteSpace(mailIndex)
-           || string.IsNullOrWhiteSpace(city) 
-           || string.IsNullOrWhiteSpace(district) 
-           || string.IsNullOrWhiteSpace(street) 
+           || string.IsNullOrWhiteSpace(city)
+           || string.IsNullOrWhiteSpace(district)
+           || string.IsNullOrWhiteSpace(street)
            || string.IsNullOrWhiteSpace(numberofHouse))
            return Result.Failure<LocationAddress>("Invalid address information.");
-        
-        var locationAddress =  new LocationAddress(mailIndex, city, district, street, numberofHouse);
-        
+
+        var locationAddress = new LocationAddress(mailIndex, city, district, street, numberofHouse);
+
         return Result.Success(locationAddress);
     }
     #region For Ef core
