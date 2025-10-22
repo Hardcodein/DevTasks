@@ -1,8 +1,8 @@
-﻿global using CSharpFunctionalExtensions;
-global using System.Text.RegularExpressions;
-global using DevTasks.Domain.Department.Relations.VO.DepartmentLocation;
-global using DevTasks.Domain.Department.Relations.VO.DepartmentPosition;
-global using DevTasks.Domain.Department.Relations;
-global using DevTasks.Domain.Department.VO;
-global using DevTasks.Domain.Location.VO;
-global using DevTasks.Domain.Position.VO;
+﻿global using System.Text.RegularExpressions;
+global using CSharpFunctionalExtensions;
+global using DirectoryService.Domain.Department.Relations;
+global using DirectoryService.Domain.Department.Relations.VO.DepartmentLocation;
+global using DirectoryService.Domain.Department.Relations.VO.DepartmentPosition;
+global using DirectoryService.Domain.Department.VO;
+global using DirectoryService.Domain.Location.VO;
+global using DirectoryService.Domain.Position.VO;

@@ -1,4 +1,4 @@
-﻿namespace DevTasks.Domain.Department.VO;
+﻿namespace DirectoryService.Domain.Department.VO;
 
 public record DepartmentPath
 {
@@ -13,7 +13,7 @@ public record DepartmentPath
     {
         if (string.IsNullOrWhiteSpace(departmentName))
             return Result.Failure<DepartmentPath>("Department Name cannot be empty");
-        
+
         string path = parent is not null
             ? $"{departmentName}\\{parent.Name}"
             : $"{departmentName}";
@@ -22,7 +22,7 @@ public record DepartmentPath
 
         return Result.Success(departmentPath);
     }
-    
+
     #region For Ef core
     private DepartmentPath()
     {
