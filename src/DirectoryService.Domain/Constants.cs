@@ -1,4 +1,4 @@
-﻿namespace DevTasks.Domain;
+﻿namespace DirectoryService.Domain;
 
 public static class Constants
 {

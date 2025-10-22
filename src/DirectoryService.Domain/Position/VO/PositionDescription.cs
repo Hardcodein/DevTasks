@@ -1,4 +1,4 @@
-﻿namespace DevTasks.Domain.Position.VO;
+﻿namespace DirectoryService.Domain.Position.VO;
 
 public class PositionDescription
 {
@@ -6,23 +6,23 @@ public class PositionDescription
     {
         Value = descriptionValue;
     }
-    
+
     public string? Value { get; }
 
     public static Result<PositionDescription> Create(string descriptionValue)
     {
         if (string.IsNullOrWhiteSpace(descriptionValue) || descriptionValue.Length <= 1000)
             return Result.Failure<PositionDescription>($"Description value is invalid");
-        
-        var positionDescription =new PositionDescription(descriptionValue);
-        
+
+        var positionDescription = new PositionDescription(descriptionValue);
+
         return Result.Success(positionDescription);
     }
-    
+
     #region For Ef core
     private PositionDescription()
     {
-        
+
     }
     #endregion
 }

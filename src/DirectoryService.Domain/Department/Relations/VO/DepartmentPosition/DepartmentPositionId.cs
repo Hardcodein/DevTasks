@@ -1,4 +1,4 @@
-﻿namespace DevTasks.Domain.Department.Relations.VO.DepartmentPosition;
+﻿namespace DirectoryService.Domain.Department.Relations.VO.DepartmentPosition;
 
 public record DepartmentPositionId
 {
@@ -6,7 +6,8 @@ public record DepartmentPositionId
     {
         Value = value;
     }
-    public Guid Value { get;}
+
+    public Guid Value { get; }
 
     public static DepartmentPositionId Create() => new(Guid.NewGuid());
     public static DepartmentPositionId Create(Guid id) => new(id);

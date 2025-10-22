@@ -1,4 +1,4 @@
-﻿namespace DevTasks.Domain.Location.VO;
+﻿namespace DirectoryService.Domain.Location.VO;
 
 public record LocationId
 {
@@ -6,8 +6,8 @@ public record LocationId
     {
         Value = valueId;
     }
+
     public Guid Value { get; }
-    
     public static LocationId Create() => new(Guid.NewGuid());
     public static LocationId Create(Guid id) => new(id);
 

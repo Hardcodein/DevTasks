@@ -1,8 +1,8 @@
-﻿namespace DevTasks.Domain.Location.VO;
+﻿namespace DirectoryService.Domain.Location.VO;
 
 public record LocationTimeZone
 {
-    private LocationTimeZone(string  ianaCode)
+    private LocationTimeZone(string ianaCode)
     {
         Ianacode = ianaCode;
     }
@@ -13,14 +13,14 @@ public record LocationTimeZone
     {
         if (string.IsNullOrEmpty(country) || string.IsNullOrEmpty(city))
             return Result.Failure<LocationTimeZone>("Country or City is required in order to create a location timezone");
-        
+
         var ianaCode = $"{country}/{city}";
 
         var locationTimeZone = new LocationTimeZone(ianaCode);
-        
+
         return Result.Success(locationTimeZone);
     }
-    
+
     #region For Ef core
     private LocationTimeZone()
     {

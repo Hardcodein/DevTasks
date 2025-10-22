@@ -1,7 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-using DevTasks.Domain.Department.Relations;
-
-namespace DevTasks.Domain.Department;
+﻿namespace DirectoryService.Domain.Department;
 
 public class Department
 {
@@ -29,13 +26,21 @@ public class Department
     }
 
     public DepartmentId Id { get; private set; }
+
     public DepartmentName Name { get; private set; }
+
     public DepartmentIdentifier Identifier { get; private set; }
+
     public Department? Parent { get; private set; }
+
     public DepartmentPath Path { get; private set; }
+
     public short Depth { get; private set; }
+
     public bool IsActive { get; private set; }
+
     public DateTime CreatedAt { get; private set; }
+
     public DateTime UpdatedAt { get; private set; }
 
     private List<Department> _children = [];
@@ -59,19 +64,18 @@ public class Department
     {
         var modelId = DepartmentId.Create();
         var modelPath = DepartmentPath.ChangePath(departmentName.Value, departmentParent).Value;
-        
+
         short depth;
 
         if (departmentParent != null)
         {
-            depth =  (short)(departmentParent.Depth + 1);
+            depth = (short)(departmentParent.Depth + 1);
         }
         else
         {
             depth = 0;
         }
-        
-        
+
         var department = new Department(
             modelId, 
             departmentName, 
@@ -81,10 +85,10 @@ public class Department
             depth,
             departmentLocations,
             departmentPositions);
-        
+
         return Result.Success(department);
     }
-    
+
     #region For Ef core
     private Department()
     {

@@ -1,17 +1,17 @@
-﻿namespace DevTasks.Infrastructure.Configurations;
+﻿namespace DirectoryService.Infrastructure.Configurations;
 
 public class LocationConfiguration : IEntityTypeConfiguration<Location>
 {
     public void Configure(EntityTypeBuilder<Location> builder)
     {
         builder.ToTable("locations");
-        
+
         builder.HasKey(l => l.Id)
             .HasName("pk_location");
 
         builder.Property(l => l.Id)
             .HasConversion(
-                id=> id.Value,
+                id => id.Value,
                 value => LocationId.Create(value))
             .HasColumnName("id");
 
@@ -41,12 +41,12 @@ public class LocationConfiguration : IEntityTypeConfiguration<Location>
             .HasDefaultValue(true)
             .HasColumnName("is_active")
             .IsRequired();
-        
-        builder.Property(l=>l.CreatedAt)
+
+        builder.Property(l => l.CreatedAt)
             .HasColumnName("created_at")
             .IsRequired();
-        
-        builder.Property(l=>l.UpdatedAt)
+
+        builder.Property(l => l.UpdatedAt)
             .HasColumnName("updated_at")
             .IsRequired();
     }

@@ -1,17 +1,21 @@
-﻿namespace DevTasks.Domain.Department.Relations;
+﻿namespace DirectoryService.Domain.Department.Relations;
 
 public class DepartmentLocation
 {
-    private DepartmentLocation(DepartmentLocationId id, 
-        DepartmentId departmentId, 
+    private DepartmentLocation(
+        DepartmentLocationId id,
+        DepartmentId departmentId,
         LocationId locationId)
     {
         Id = id;
         DepartmentId = departmentId;
         LocationId = locationId;
     }
+
     public DepartmentLocationId Id { get; private set; }
+
     public DepartmentId DepartmentId { get; private set; }
+
     public LocationId LocationId { get; private set; }
 
     public static Result<DepartmentLocation> Create(DepartmentId departmentId, LocationId locationId)
@@ -20,12 +24,12 @@ public class DepartmentLocation
             return Result.Failure<DepartmentLocation>("Department ID or location ID cannot be empty.");
 
         var id = DepartmentLocationId.Create();
-        
-        var departmentLocation  = new DepartmentLocation(id, departmentId, locationId);
-        
+
+        var departmentLocation = new DepartmentLocation(id, departmentId, locationId);
+
         return Result.Success(departmentLocation);
     }
-    
+
     #region For Ef core
     private DepartmentLocation()
     {

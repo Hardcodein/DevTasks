@@ -1,4 +1,4 @@
-﻿namespace DevTasks.Infrastructure.Configurations;
+﻿namespace DirectoryService.Infrastructure.Configurations;
 
 public class DepartmentConfiguration : IEntityTypeConfiguration<Department>
 {
@@ -8,7 +8,7 @@ public class DepartmentConfiguration : IEntityTypeConfiguration<Department>
 
         builder.HasKey(x => x.Id)
             .HasName("pk_departments");
-        
+
         builder.Property(x => x.Id)
             .HasConversion(
                 id => id.Value,
@@ -17,7 +17,7 @@ public class DepartmentConfiguration : IEntityTypeConfiguration<Department>
 
         builder.OwnsOne(d => d.Name, ownName =>
         {
-            ownName.Property(n=>n.Value)
+            ownName.Property(n => n.Value)
                 .HasColumnName("name")
                 .IsRequired();
 
@@ -39,21 +39,21 @@ public class DepartmentConfiguration : IEntityTypeConfiguration<Department>
                 .HasColumnName("path")
                 .IsRequired();
         });
-        
+
         builder.Property(d => d.Depth)
             .HasColumnName("depth")
             .IsRequired();
-        
+
         builder.Property(d => d.IsActive)
             .HasDefaultValue(true)
             .HasColumnName("is_active")
             .IsRequired();
-        
-        builder.Property(d=>d.CreatedAt)
+
+        builder.Property(d => d.CreatedAt)
             .HasColumnName("created_at")
             .IsRequired();
-        
-        builder.Property(d=>d.UpdatedAt)
+
+        builder.Property(d => d.UpdatedAt)
             .HasColumnName("updated_at")
             .IsRequired();
 

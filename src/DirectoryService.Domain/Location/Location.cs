@@ -1,4 +1,4 @@
-﻿namespace DevTasks.Domain.Location;
+﻿namespace DirectoryService.Domain.Location;
 
 public class Location
 {
@@ -6,26 +6,35 @@ public class Location
         LocationId locationId,
         LocationName locationName,
         LocationAddress locationAddress,
-        LocationTimeZone locationTimeZone)
+        LocationTimeZone locationTimeZone,
+        IEnumerable<DepartmentLocation> departments)
     {
         Id = locationId;
         Name = locationName;
         Address = locationAddress;
         Timezone = locationTimeZone;
         IsActive = true;
+        _departments = [..departments];
         CreatedAt = DateTime.UtcNow;
         UpdatedAt = DateTime.UtcNow;
     }
 
     public LocationId Id { get; private set; }
+
     public LocationName Name { get; private set; }
+
     public LocationAddress Address { get; private set; }
+
     public LocationTimeZone? Timezone { get; private set; }
+
     public bool IsActive { get; private set; }
+
     public DateTime CreatedAt { get; private set; }
+
     public DateTime UpdatedAt { get; private set; }
 
     private List<DepartmentLocation> _departments;
+
     public IReadOnlyList<DepartmentLocation> Departments => _departments;
 
     public static Result<Location> Create(
@@ -35,7 +44,8 @@ public class Location
         string city,
         string district,
         string street,
-        string numberofHouse)
+        string numberofHouse,
+        IEnumerable<DepartmentLocation> departments)
     {
         var id = LocationId.Create();
 
@@ -45,11 +55,11 @@ public class Location
 
         var timezone = LocationTimeZone.Create(country, city).Value;
 
-        var location = new Location(id, name, address, timezone);
+        var location = new Location(id, name, address, timezone,departments);
 
         return Result.Success(location);
     }
-    
+
     #region For Ef core
     private Location()
     {
