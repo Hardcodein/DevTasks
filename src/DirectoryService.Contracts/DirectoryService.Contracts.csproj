@@ -8,13 +8,20 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="DTOs\" />
-      <Folder Include="Requests\" />
-      <Folder Include="Responses\" />
+      <Compile Remove="DTOs\**" />
+      <Compile Remove="Requests\**" />
+      <Compile Remove="Responses\**" />
+      <EmbeddedResource Remove="DTOs\**" />
+      <EmbeddedResource Remove="Requests\**" />
+      <EmbeddedResource Remove="Responses\**" />
+      <None Remove="DTOs\**" />
+      <None Remove="Requests\**" />
+      <None Remove="Responses\**" />
     </ItemGroup>
 
     <ItemGroup>
       <PackageReference Include="CSharpFunctionalExtensions" Version="3.6.0" />
+      <PackageReference Include="FluentValidation" Version="12.0.0" />
     </ItemGroup>
 
 </Project>

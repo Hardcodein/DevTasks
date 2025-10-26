@@ -1,3 +1,4 @@
-﻿global using DirectoryService.API;
-global using DirectoryService.Infrastructure;
-global using Microsoft.AspNetCore.Mvc;
+﻿global using DirectoryService.API.DI;
+global using DirectoryService.Application.DI;
+global using DirectoryService.Infrastructure.DI;
+global using Microsoft.OpenApi.Models;
