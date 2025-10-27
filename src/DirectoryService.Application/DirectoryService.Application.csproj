@@ -8,15 +8,22 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Use-cases\" />
+      <Compile Remove="Use-cases\**" />
+      <EmbeddedResource Remove="Use-cases\**" />
+      <None Remove="Use-cases\**" />
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\DirectoryService.Contracts\DirectoryService.Contracts.csproj" />
       <ProjectReference Include="..\DirectoryService.Domain\DirectoryService.Domain.csproj" />
+      <ProjectReference Include="..\Shared\Shared.csproj" />
     </ItemGroup>
 
     <ItemGroup>
       <PackageReference Include="CSharpFunctionalExtensions" Version="3.6.0" />
+      <PackageReference Include="FluentValidation" Version="12.0.0" />
+      <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.0.0" />
+      <PackageReference Include="Microsoft.Extensions.Logging" Version="10.0.0-rc.1.25451.107" />
     </ItemGroup>
 
 </Project>

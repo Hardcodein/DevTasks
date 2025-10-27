@@ -27,7 +27,27 @@ public class LocationConfiguration : IEntityTypeConfiguration<Location>
 
         builder.OwnsOne(l => l.Address, ownAddress =>
         {
+
+            ownAddress.Property(a => a.MailIndex)
+                .HasColumnName("mail_index");
+
+            ownAddress.Property(a => a.Country)
+                .HasColumnName("country");
+
+            ownAddress.Property(a => a.City)
+                .HasColumnName("city");
+
+            ownAddress.Property(a => a.District)
+                .HasColumnName("district");
+
+            ownAddress.Property(a => a.Street)
+                .HasColumnName("street");
+
+            ownAddress.Property(a => a.NumberofHouse)
+                .HasColumnName("number_of_house");
+
             ownAddress.ToJson("address");
+
         });
 
         builder.OwnsOne(l => l.Timezone, ownTimezone =>
