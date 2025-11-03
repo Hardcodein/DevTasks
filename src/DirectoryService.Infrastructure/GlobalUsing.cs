@@ -1,4 +1,5 @@
-﻿global using DirectoryService.Domain;
+﻿global using CSharpFunctionalExtensions;
+global using DirectoryService.Domain;
 global using DirectoryService.Domain.Departments;
 global using DirectoryService.Domain.Departments.Relations;
 global using DirectoryService.Domain.Departments.Relations.VO.DepartmentLocation;
@@ -16,3 +17,4 @@ global using Microsoft.EntityFrameworkCore.Metadata.Builders;
 global using Microsoft.Extensions.Configuration;
 global using Microsoft.Extensions.DependencyInjection;
 global using Microsoft.Extensions.Logging;
+global using Shared;

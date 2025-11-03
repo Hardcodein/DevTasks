@@ -12,7 +12,7 @@ public class LocationConfiguration : IEntityTypeConfiguration<Location>
         builder.Property(l => l.Id)
             .HasConversion(
                 id => id.Value,
-                value => LocationId.Create(value))
+                value => LocationId.Of(value))
             .HasColumnName("id");
 
         builder.OwnsOne(l => l.Name, ownName =>

@@ -19,14 +19,14 @@ public class DepartmentLocationConfiguration : IEntityTypeConfiguration<Departme
         builder.Property(dl => dl.DepartmentId)
             .HasConversion(
                 i => i.Value,
-                value => DepartmentId.Create(value))
+                value => DepartmentId.Of(value))
             .HasColumnName("department_id")
             .IsRequired();
 
         builder.Property(dl => dl.LocationId)
             .HasConversion(
                 i => i.Value,
-                value => LocationId.Create(value))
+                value => LocationId.Of(value))
             .HasColumnName("location_id")
             .IsRequired();
 
