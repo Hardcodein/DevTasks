@@ -8,4 +8,5 @@ global using FluentValidation;
 global using Microsoft.Extensions.DependencyInjection;
 global using Microsoft.Extensions.Logging;
 global using Shared;
+global using Shared.Extensions;
 global using Shared.Validation;
