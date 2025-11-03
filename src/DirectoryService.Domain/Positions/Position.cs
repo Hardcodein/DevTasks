@@ -33,7 +33,7 @@ public class Position
 
     public IReadOnlyList<DepartmentPosition> Departments => _departments;
 
-    public static Result<Position> Create(
+    public static Result<Position, Error> Create(
         string positionName,
         string positionDescription,
         IEnumerable<DepartmentPosition> departments)
@@ -46,7 +46,7 @@ public class Position
 
         var position = new Position(id, name, description, departments);
 
-        return Result.Success(position);
+        return position;
     }
 
     #region For Ef core

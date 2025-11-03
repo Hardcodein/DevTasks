@@ -55,7 +55,7 @@ public class Department
 
     public IReadOnlyList<DepartmentPosition> Positions => _positions;
 
-    public static Result<Department> Create(
+    public static Result<Department, Error> Create(
         DepartmentName departmentName,
         DepartmentIdentifier departmentIdentifier,
         Department? departmentParent,
@@ -77,8 +77,8 @@ public class Department
         }
 
         var department = new Department(
-            modelId, 
-            departmentName, 
+            modelId,
+            departmentName,
             departmentIdentifier,
             departmentParent!,
             modelPath,
@@ -86,13 +86,13 @@ public class Department
             departmentLocations,
             departmentPositions);
 
-        return Result.Success(department);
+        return department;
     }
 
     #region For Ef core
     private Department()
     {
-        
+
     }
     #endregion
 }

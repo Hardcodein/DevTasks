@@ -9,14 +9,14 @@ public record PositionName
 
     public string Value { get; }
 
-    public static Result<PositionName> Create(string valueName)
+    public static Result<PositionName, Error> Create(string valueName)
     {
         if (valueName.Length < 3 || valueName.Length > 100 || string.IsNullOrWhiteSpace(valueName))
-            return Result.Failure<PositionName>("Location name must be between 3 and 100 characters");
+            return GeneralErrors.ValueIsInvalid(nameof(valueName));
 
         var positionName = new PositionName(valueName);
 
-        return Result.Success(positionName);
+        return positionName;
     }
 
     #region For Ef core
