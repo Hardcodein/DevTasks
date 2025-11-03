@@ -5,7 +5,12 @@
 public class LocationsController : ControllerBase
 {
     [HttpPost]
-    public async Task<Guid> CreateLocationAsync(
+    [ProducesResponseType<Envelope<Guid>>(201)]
+    [ProducesResponseType<Envelope>(400)]
+    [ProducesResponseType<Envelope>(500)]
+    [ProducesResponseType<Envelope>(409)]
+    [EndpointSummary("Создать локацию")]
+    public async Task<EndpointResult<Guid>> CreateLocationAsync(
         [FromBody] CreateLocationRequest request,
         [FromServices] CreateLocationCommandHandler handler,
         CancellationToken token = default)

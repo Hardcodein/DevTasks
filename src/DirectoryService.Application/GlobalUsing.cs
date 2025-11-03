@@ -1,4 +1,5 @@
-﻿global using DirectoryService.Application.Locations.Command;
+﻿global using CSharpFunctionalExtensions;
+global using DirectoryService.Application.Locations.Command;
 global using DirectoryService.Contracts.Locations.DTOs.Validators;
 global using DirectoryService.Contracts.Locations.Requests;
 global using DirectoryService.Domain.Interfaces.Locations.Repository;
@@ -6,4 +7,5 @@ global using DirectoryService.Domain.Locations;
 global using FluentValidation;
 global using Microsoft.Extensions.DependencyInjection;
 global using Microsoft.Extensions.Logging;
+global using Shared;
 global using Shared.Validation;

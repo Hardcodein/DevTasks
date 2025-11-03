@@ -18,7 +18,7 @@ public class CreateLocationCommandHandler
         _logger = logger;
     }
 
-    public async Task<Guid> Handle(CreateLocationCommand command, CancellationToken token = default)
+    public async Task<Result<Guid, Errors>> Handle(CreateLocationCommand command, CancellationToken token = default)
     {
         var validationResult = await _validator.ValidateAsync(command, token);
 
