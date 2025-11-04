@@ -9,20 +9,20 @@ public record DepartmentIdentifier
 
     public string Value { get; }
 
-    public static Result<DepartmentIdentifier> Create(string valueIdentifier)
+    public static Result<DepartmentIdentifier, Error> Create(string valueIdentifier)
     {
-        if(valueIdentifier.Length < 3 || valueIdentifier.Length > 150 || string.IsNullOrWhiteSpace(valueIdentifier)||!Regex.IsMatch(valueIdentifier, @"^[a-zA-Z]+$"))
-            return Result.Failure<DepartmentIdentifier>("No valid value identifier");
+        if (valueIdentifier.Length < 3 || valueIdentifier.Length > 150 || string.IsNullOrWhiteSpace(valueIdentifier) || !Regex.IsMatch(valueIdentifier, @"^[a-zA-Z]+$"))
+            return GeneralErrors.ValueIsInvalid(nameof(DepartmentIdentifier));
 
         var departmentIdentifier = new DepartmentIdentifier(valueIdentifier);
 
-        return Result.Success(departmentIdentifier);
+        return departmentIdentifier;
     }
 
     #region For Ef core
     private DepartmentIdentifier()
     {
-        
+
     }
     #endregion
 }

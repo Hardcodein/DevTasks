@@ -37,7 +37,7 @@ public class Location
 
     public IReadOnlyList<DepartmentLocation> Departments => _departments;
 
-    public static Result<Location> Create(
+    public static Result<Location, Error> Create(
         string locationName,
         string mailIndex,
         string country,
@@ -58,7 +58,7 @@ public class Location
 
         var location = new Location(id, name, address, timezone, departments);
 
-        return Result.Success(location);
+        return location;
     }
 
     #region For Ef core

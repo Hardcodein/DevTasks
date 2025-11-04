@@ -1,15 +1,24 @@
-﻿namespace Shared.Validation;
+﻿using System;
+
+namespace Shared.Validation;
 
 public static class TimeZoneValidator
 {
     public static bool BeValidIanaCodeZone(string timeZone)
     {
-        if (string.IsNullOrWhiteSpace(timeZone))
+        try
+        {
+            var tя = TimeZoneInfo.FindSystemTimeZoneById(timeZone);
+            return timeZone != null;
+        }
+        catch (TimeZoneNotFoundException)
+        {
             return false;
-
-        var tz = TimeZoneInfo.FindSystemTimeZoneById(timeZone);
-
-        return tz is not null;
+        }
+        catch (InvalidTimeZoneException)
+        {
+            return false;
+        }
     }
 
 }

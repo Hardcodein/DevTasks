@@ -25,7 +25,7 @@ public record LocationAddress
     public string Street { get; }
     public string NumberofHouse { get; }
 
-    public static Result<LocationAddress> Create(
+    public static Result<LocationAddress, Error> Create(
         string mailIndex,
         string country,
         string city,
@@ -39,11 +39,11 @@ public record LocationAddress
            || string.IsNullOrWhiteSpace(district)
            || string.IsNullOrWhiteSpace(street)
            || string.IsNullOrWhiteSpace(numberofHouse))
-            return Result.Failure<LocationAddress>("Invalid address information.");
+            return GeneralErrors.ValueIsInvalid(nameof(LocationAddress));
 
         var locationAddress = new LocationAddress(mailIndex, country, city, district, street, numberofHouse);
 
-        return Result.Success(locationAddress);
+        return locationAddress;
     }
     #region For Ef core
     private LocationAddress()

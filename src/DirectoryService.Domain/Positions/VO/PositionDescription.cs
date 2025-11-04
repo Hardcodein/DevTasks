@@ -9,14 +9,14 @@ public class PositionDescription
 
     public string? Value { get; }
 
-    public static Result<PositionDescription> Create(string descriptionValue)
+    public static Result<PositionDescription, Error> Create(string descriptionValue)
     {
         if (string.IsNullOrWhiteSpace(descriptionValue) || descriptionValue.Length <= 1000)
-            return Result.Failure<PositionDescription>($"Description value is invalid");
+            return GeneralErrors.ValueIsInvalid(nameof(DepartmentLocation));
 
         var positionDescription = new PositionDescription(descriptionValue);
 
-        return Result.Success(positionDescription);
+        return positionDescription;
     }
 
     #region For Ef core

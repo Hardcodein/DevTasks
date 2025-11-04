@@ -12,7 +12,7 @@ public class LocationsRepository : ILocationsRepository
         _logger = logger;
     }
 
-    public async Task<Guid> CreateAsync(Location location, CancellationToken token = default)
+    public async Task<Result<Guid, Errors>> CreateAsync(Location location, CancellationToken token = default)
     {
         try
         {
@@ -27,7 +27,7 @@ public class LocationsRepository : ILocationsRepository
         {
             _logger.LogWarning($"Error adding location entities to the database. {ex.Message}");
 
-            return Guid.Empty;
+            return GeneralErrors.SaveIsFailed(nameof(Location)).ToErrors();
         }
     }
 }

@@ -9,10 +9,10 @@ public record DepartmentPath
 
     public string Value { get; }
 
-    public static Result<DepartmentPath> ChangePath(string departmentName, Department? parent)
+    public static Result<DepartmentPath, Error> ChangePath(string departmentName, Department? parent)
     {
         if (string.IsNullOrWhiteSpace(departmentName))
-            return Result.Failure<DepartmentPath>("Department Name cannot be empty");
+            return GeneralErrors.ValueIsInvalid(nameof(DepartmentPath));
 
         string path = parent is not null
             ? $"{departmentName}\\{parent.Name}"
@@ -20,13 +20,13 @@ public record DepartmentPath
 
         var departmentPath = new DepartmentPath(path);
 
-        return Result.Success(departmentPath);
+        return departmentPath;
     }
 
     #region For Ef core
     private DepartmentPath()
     {
-        
+
     }
     #endregion
 }

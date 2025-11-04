@@ -12,12 +12,12 @@ public class AdrdressDTOValidator : AbstractValidator<AddressDTO>
         RuleFor(a => a.Country)
             .NotNull().WithMessage("Country is null")
             .NotEmpty().WithMessage("Country is required")
-            .MaximumLength(50).WithMessage("City cannot exceed 100 characters");
+            .MaximumLength(50).WithMessage("Country cannot exceed 50 characters");
 
         RuleFor(a => a.City)
             .NotNull().WithMessage("City is null")
             .NotEmpty().WithMessage("City is required")
-            .MaximumLength(50).WithMessage("City cannot exceed 100 characters");
+            .MaximumLength(50).WithMessage("City cannot exceed 50 characters");
 
         RuleFor(a => a.District)
             .NotNull().WithMessage("District is null")
@@ -32,6 +32,6 @@ public class AdrdressDTOValidator : AbstractValidator<AddressDTO>
         RuleFor(a => a.NumberofHouse)
             .NotNull().WithMessage("NumberofHouse is null")
             .NotEmpty().WithMessage("NumberofHouse is required")
-            .MaximumLength(10).WithMessage("NumberofHouse cannot exceed 5 characters");
+            .MaximumLength(10).WithMessage("NumberofHouse cannot exceed 10 characters");
     }
 }
