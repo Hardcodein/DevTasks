@@ -1,0 +1,57 @@
+﻿services:
+    
+  directory_service:
+    container_name: directory-service
+    build:
+      context: .
+      dockerfile: src/DirectoryService.API/Dockerfile
+    restart: always
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Docker
+      - Serilog__WriteTo__0__Args__serverUrl=http://seq:5341
+    ports:
+      - "9000:8080"
+    depends_on:
+      - postgres
+      - seq
+    networks:
+      - dev_app_network
+
+  postgres:
+    container_name: postgres
+    image: postgres
+    restart: on-failure
+    environment:
+      POSTGRES_DB: directory_service_postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5434:5432"
+    volumes:
+      - postgres-data_dir_service:/var/lib/postgresql/data
+    networks:
+      - dev_app_network
+      
+  seq:
+    container_name: seq
+    image: datalust/seq:latest
+    restart: always
+    environment:
+      ACCEPT_EULA: ${ACCEPT_EULA}
+      SEQ_FIRSTRUN_ADMINUSERNAME: ${SEQ_ADMIN_USERNAME}
+      SEQ_FIRSTRUN_ADMINPASSWORD: ${SEQ_ADMIN_PASSWORD}
+    ports:
+      - "8081:80"
+      - "5341:5341"
+    volumes:
+      - seq-data:/data
+    networks:
+      - dev_app_network
+    
+networks:
+  dev_app_network:
+    driver: bridge
+
+volumes:
+  postgres-data_dir_service:
+  seq-data:
