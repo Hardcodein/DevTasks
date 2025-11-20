@@ -1,32 +1,31 @@
-﻿var builder = WebApplication.CreateBuilder(args);
+﻿using DirectoryService.Infrastructure.Persistence;
 
-builder.Services.AddControllers();
-
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(c =>
+Log.Logger = new LoggerConfiguration()
+    .WriteTo.Console(formatProvider: CultureInfo.InvariantCulture)
+    .WriteTo.Debug()
+    .MinimumLevel.Information()
+    .CreateBootstrapLogger();
+try
 {
-    c.SwaggerDoc("v1", new OpenApiInfo
-    {
-        Title = "DirectoryService API",
-        Version = "v1"
-    });
-});
+    Log.Information("Starting web application");
 
-builder.Services.AddProgramDependencies();
-builder.Services.AddInfrastructureLayer(builder.Configuration);
-builder.Services.AddApplicationLayer();
+    var builder = WebApplication.CreateBuilder(args);
 
-var app = builder.Build();
+    var environment = builder.Environment.EnvironmentName;
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI(c =>
-    {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "DirectoryService API v1");
-    });
+    builder.Services.AddWebAppDependencies(builder.Configuration);
+
+    var app = builder.Build();
+
+    app.ConfigureWebApp();
+
+    app.Run();
 }
-
-app.UseRouting();
-app.MapControllers();
-app.Run();
+catch (Exception ex)
+{
+    Log.Fatal(ex, "Application terminated unexpectedly");
+}
+finally
+{
+    Log.CloseAndFlush();
+}
