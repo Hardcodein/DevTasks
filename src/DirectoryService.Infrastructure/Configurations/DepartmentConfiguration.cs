@@ -12,7 +12,7 @@ public class DepartmentConfiguration : IEntityTypeConfiguration<Department>
         builder.Property(x => x.Id)
             .HasConversion(
                 id => id.Value,
-                value => DepartmentId.Create(value))
+                value => DepartmentId.Of(value))
             .HasColumnName("id");
 
         builder.OwnsOne(d => d.Name, ownName =>

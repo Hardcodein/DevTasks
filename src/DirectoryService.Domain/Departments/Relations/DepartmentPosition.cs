@@ -18,22 +18,22 @@ public class DepartmentPosition
 
     public PositionId PositionId { get; private set; }
 
-    public static Result<DepartmentPosition> Create(DepartmentId departmentId, PositionId positionId)
+    public static Result<DepartmentPosition,Error> Create(DepartmentId departmentId, PositionId positionId)
     {
-        if (departmentId.Value  == Guid.Empty || positionId.Value == Guid.Empty)
-            return Result.Failure<DepartmentPosition>("Department ID or position ID cannot be empty.");
+        if (departmentId.Value == Guid.Empty || positionId.Value == Guid.Empty)
+            return GeneralErrors.ValueIsInvalid(nameof(DepartmentLocation));
 
         var id = DepartmentPositionId.Create();
 
         var departmentPosition = new DepartmentPosition(id, departmentId, positionId);
 
-        return Result.Success(departmentPosition);
+        return departmentPosition;
     }
 
     #region For Ef core
     private DepartmentPosition()
     {
-        
+
     }
     #endregion
 }

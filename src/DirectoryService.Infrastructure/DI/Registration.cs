@@ -17,7 +17,6 @@ public static class Registration
         IConfiguration configuration)
     {
         services.AddScoped(_ => new DirectoryServiceDbContext(configuration));
-
         return services;
     }
 

@@ -7,3 +7,4 @@ global using DirectoryService.Domain.Departments.VO;
 global using DirectoryService.Domain.Locations;
 global using DirectoryService.Domain.Locations.VO;
 global using DirectoryService.Domain.Positions.VO;
+global using Shared;

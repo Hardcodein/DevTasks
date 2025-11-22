@@ -12,7 +12,7 @@ public class PositionConfiguration : IEntityTypeConfiguration<Position>
         builder.Property(x => x.Id)
             .HasConversion(
                 id => id.Value,
-                value => PositionId.Create(value)
+                value => PositionId.Of(value)
             ).IsRequired();
 
         builder.OwnsOne(p => p.Name, ownName =>

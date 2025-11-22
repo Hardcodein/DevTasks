@@ -9,20 +9,20 @@ public record LocationName
 
     public string Value { get; }
 
-    public static Result<LocationName> Create(string valueName)
+    public static Result<LocationName, Error> Create(string valueName)
     {
-        if(valueName.Length < 3 || valueName.Length > 120 || string.IsNullOrWhiteSpace(valueName))
-            return Result.Failure<LocationName>("Location name must be between 3 and 120 characters");
+        if (valueName.Length < 3 || valueName.Length > 120 || string.IsNullOrWhiteSpace(valueName))
+            return GeneralErrors.ValueIsInvalid(nameof(LocationName));
 
         var locationName = new LocationName(valueName);
 
-        return Result.Success(locationName);
+        return locationName;
     }
 
     #region For Ef core
     private LocationName()
     {
-        
+
     }
     #endregion
 }

@@ -23,7 +23,7 @@ public class CreateLocationCommandHandler
         var validationResult = await _validator.ValidateAsync(command, token);
 
         if (!validationResult.IsValid)
-            return Guid.Empty;
+            return validationResult.ToErrors();
 
         var addedLocation = Location.Create(
             command.request.Name,

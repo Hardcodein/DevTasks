@@ -2,5 +2,5 @@
 
 public interface ILocationsRepository
 {
-    Task<Guid> CreateAsync(Location location, CancellationToken token = default);
+    Task<Result<Guid, Errors>> CreateAsync(Location location, CancellationToken token = default);
 }

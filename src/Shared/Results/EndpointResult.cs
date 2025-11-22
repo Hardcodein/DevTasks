@@ -1,6 +1,4 @@
-﻿
-
-namespace Shared.Results;
+﻿namespace Shared.Results;
 
 public sealed class EndpointResult<TValue> : IResult
 {

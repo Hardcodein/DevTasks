@@ -8,6 +8,12 @@ public class GeneralErrors
     public static Error InvalidEmail(string fieldName = "email")
         => Error.VALIDATION($"Field '{fieldName}' must be a valid email address");
 
+    public static Error ValueIsInvalid(string field_Name)
+        => Error.VALIDATION($"No valid {field_Name} value");
+
+    public static Error SaveIsFailed(string name)
+        => Error.FAILURE($"Error saving {name} to database.");
+
     public static Error PasswordTooWeak()
         => Error.VALIDATION($"Password does not meet security requirements");
 
