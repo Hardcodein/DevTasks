@@ -1,4 +1,5 @@
 ﻿global using CSharpFunctionalExtensions;
+global using DirectoryService.Application.Abstractions;
 global using DirectoryService.Application.Locations.Command;
 global using DirectoryService.Contracts.Locations.DTOs.Validators;
 global using DirectoryService.Contracts.Locations.Requests;

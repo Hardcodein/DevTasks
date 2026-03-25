@@ -1,4 +1,6 @@
-﻿namespace DirectoryService.Infrastructure.Persistence.Repositories;
+﻿using Npgsql;
+
+namespace DirectoryService.Infrastructure.Persistence.Repositories;
 
 public class LocationsRepository : ILocationsRepository
 {
@@ -19,13 +21,19 @@ public class LocationsRepository : ILocationsRepository
             await _dbContext.Locations.AddAsync(location, token);
             await _dbContext.SaveChangesAsync(token);
 
-            _logger.LogInformation($"Add new location in DB. Id = {location.Id.Value}");
+            _logger.LogInformation("Add new location in DB. Id = {LocationId}", location.Id.Value);
 
             return location.Id.Value;
         }
+        catch(PostgresException ex) when (ex.SqlState == "23505")
+        {
+            _logger.LogWarning("Duplicate location detected. {Detail}", ex.Detail);
+
+            return GeneralErrors.EntityExists(nameof(Location), ex.ConstraintName ?? "unknown", " ").ToErrors();
+        }
         catch (Exception ex)
         {
-            _logger.LogWarning($"Error adding location entities to the database. {ex.Message}");
+            _logger.LogWarning("Error adding location entities to the database. {Message}", ex.Message);
 
             return GeneralErrors.SaveIsFailed(nameof(Location)).ToErrors();
         }

@@ -9,16 +9,32 @@ public record LocationTimeZone
 
     public string Ianacode { get; }
 
-    public static Result<LocationTimeZone, Error> Create(string country, string city)
+    public static Result<LocationTimeZone, Error> Create(string ianaCode)
     {
-        if (string.IsNullOrEmpty(country) || string.IsNullOrEmpty(city))
+        if (string.IsNullOrWhiteSpace(ianaCode))
             return GeneralErrors.ValueIsInvalid(nameof(LocationTimeZone));
 
-        var ianaCode = $"{country}/{city}";
+        if(!IsValidIanaCode(ianaCode))
+            return GeneralErrors.ValueIsInvalid(nameof(LocationTimeZone));
 
-        var locationTimeZone = new LocationTimeZone(ianaCode);
+        return new LocationTimeZone(ianaCode);
+    }
 
-        return locationTimeZone;
+    private static bool IsValidIanaCode(string ianaCode)
+    {
+        try
+        {
+            TimeZoneInfo.FindSystemTimeZoneById(ianaCode);
+            return true;
+        }
+        catch (TimeZoneNotFoundException)
+        {
+            return false;
+        }
+        catch (InvalidTimeZoneException)
+        {
+            return false;
+        }
     }
 
     #region For Ef core

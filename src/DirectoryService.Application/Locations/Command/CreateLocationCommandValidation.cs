@@ -9,7 +9,9 @@ public class CreateLocationCommandValidation : AbstractValidator<CreateLocationC
 
         RuleFor(c => c.request.Name)
             .NotNull().WithMessage("Name is null")
-            .NotEmpty().WithMessage("Name is required");
+            .NotEmpty().WithMessage("Name is required")
+            .MinimumLength(3).WithMessage("Name must be at least 3 characters")
+            .MaximumLength(120).WithMessage("Name cannot exceed 120 character");
 
         RuleFor(c => c.request.Address)
             .NotNull().WithMessage("Address is null")
