@@ -18,8 +18,8 @@ public class CreateLocationCommandValidation : AbstractValidator<CreateLocationC
             .SetValidator(new AdrdressDTOValidator());
 
         RuleFor(c => c.request.TimeZone)
-            .NotNull().WithMessage("TimeZone is null ")
+            .NotNull().WithMessage("TimeZone is null")
             .NotEmpty().WithMessage("TimeZone is required")
-            .Must(TimeZoneValidator.BeValidIanaCodeZone).WithMessage("Invalid time zone identifier");
+            .MustBeValidIanaTimeZone();
     }
 }

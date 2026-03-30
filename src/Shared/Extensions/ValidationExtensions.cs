@@ -1,4 +1,6 @@
-﻿namespace Shared.Extensions;
+﻿using FluentValidation;
+
+namespace Shared.Extensions;
 
 public static class ValidationExtensions
 {
@@ -11,4 +13,9 @@ public static class ValidationExtensions
 
         return errors.ToList();
     }
+
+    public static IRuleBuilderOptions<T, string> MustBeValidIanaTimeZone<T>(
+        this IRuleBuilder<T, string> rule)
+            => rule.Must(Shared.Validation.TimeZoneValidator.BeValidIanaCodeZone)
+                .WithMessage("Invalid IANA timezone");
 }
