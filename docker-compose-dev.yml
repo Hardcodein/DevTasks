@@ -20,7 +20,7 @@
   postgres:
     container_name: postgres
     image: postgres:16
-    restart: on-failure
+    restart: unless-stopped
     environment:
       POSTGRES_DB: directory_service_postgres
       POSTGRES_USER: postgres
@@ -28,14 +28,14 @@
     ports:
       - "5434:5432"
     volumes:
-      - postgres-data_dir_service:/var/lib/postgresql
+      - postgres-data_dir_service:/var/lib/postgresql/data
     networks:
       - dev_app_network
 
   pgadmin:
     container_name: pgadmin
     image: dpage/pgadmin4
-    restart: on-failure
+    restart: unless-stopped
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@admin.com
       PGADMIN_DEFAULT_PASSWORD: admin
