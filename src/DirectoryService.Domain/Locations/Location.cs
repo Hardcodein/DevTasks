@@ -44,19 +44,26 @@ public class Location
         string city,
         string district,
         string street,
-        string numberofHouse)
+        string numberofHouse,
+        string timezone)
     {
         var id = LocationId.Create();
 
-        var name = LocationName.Create(locationName).Value;
+        var nameResult = LocationName.Create(locationName);
+        if(nameResult.IsFailure)
+            return nameResult.Error;
 
-        var address = LocationAddress.Create(mailIndex, country, city, district, street, numberofHouse).Value;
+        var addressResult = LocationAddress.Create(mailIndex, country, city, district, street, numberofHouse);
+        if(addressResult.IsFailure)
+            return addressResult.Error;
 
-        var timezone = LocationTimeZone.Create(country, city).Value;
+        var timezoneResult = LocationTimeZone.Create(timezone);
+        if(timezoneResult.IsFailure)
+            return timezoneResult.Error;
 
-        IEnumerable<DepartmentLocation> departments = new List<DepartmentLocation>();
+        IEnumerable<DepartmentLocation> departments = [];
 
-        var location = new Location(id, name, address, timezone, departments);
+        var location = new Location(id, nameResult.Value, addressResult.Value, timezoneResult.Value, departments);
 
         return location;
     }

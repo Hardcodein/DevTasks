@@ -46,8 +46,6 @@ public class LocationConfiguration : IEntityTypeConfiguration<Location>
             ownAddress.Property(a => a.NumberofHouse)
                 .HasColumnName("number_of_house");
 
-            ownAddress.ToJson("address");
-
         });
 
         builder.OwnsOne(l => l.Timezone, ownTimezone =>
